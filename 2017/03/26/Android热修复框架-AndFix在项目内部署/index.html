@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android热修复框架: AndFix在项目内部署 | 他</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍AndFix Github: AndFix（当前版本0.5.0）是一个通过Native层替换Java类函数指针，达到修改程序流程，实现热修复的框架。App使用该框架可以达到无声修复bug代码内bug的效果，用户不需要重新安装app。AndFix经测试可以在开启MultiDex的项目内使用，但仅能新增/修改Java内的方法，新增类/修改类属性不会产生修改，可以说局限性还是比较大。在项目中应用An">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android热修复框架: AndFix在项目内部署">
+<meta property="og:url" content="http://yoursite.com/2017/03/26/Android热修复框架-AndFix在项目内部署/index.html">
+<meta property="og:site_name" content="他">
+<meta property="og:description" content="介绍AndFix Github: AndFix（当前版本0.5.0）是一个通过Native层替换Java类函数指针，达到修改程序流程，实现热修复的框架。App使用该框架可以达到无声修复bug代码内bug的效果，用户不需要重新安装app。AndFix经测试可以在开启MultiDex的项目内使用，但仅能新增/修改Java内的方法，新增类/修改类属性不会产生修改，可以说局限性还是比较大。在项目中应用An">
+<meta property="og:updated_time" content="2017-03-27T05:51:49.593Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android热修复框架: AndFix在项目内部署">
+<meta name="twitter:description" content="介绍AndFix Github: AndFix（当前版本0.5.0）是一个通过Native层替换Java类函数指针，达到修改程序流程，实现热修复的框架。App使用该框架可以达到无声修复bug代码内bug的效果，用户不需要重新安装app。AndFix经测试可以在开启MultiDex的项目内使用，但仅能新增/修改Java内的方法，新增类/修改类属性不会产生修改，可以说局限性还是比较大。在项目中应用An">
+  
+    <link rel="alternate" href="/atom.xml" title="他" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">他</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android热修复框架-AndFix在项目内部署" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/26/Android热修复框架-AndFix在项目内部署/" class="article-date">
+  <time datetime="2017-03-26T10:42:43.000Z" itemprop="datePublished">2017-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android热修复框架: AndFix在项目内部署
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><strong>AndFix</strong> <a href="https://github.com/alibaba/AndFix.git" target="_blank" rel="external">Github: AndFix</a>（当前版本0.5.0）是一个通过Native层替换Java类函数指针，达到修改程序流程，实现热修复的框架。<br>App使用该框架可以达到无声修复bug代码内bug的效果，用户不需要重新安装app。<br>AndFix经测试可以在开启MultiDex的项目内使用，但仅能新增/修改Java内的方法，新增类/修改类属性不会产生修改，可以说局限性还是比较大。在项目中应用AndFix需要谨慎使用，多测试，因为一不小心App就可能会Crash。</p>
+<h2 id="目标：-将AndFix框架部署到Android项目中。本文会带你处理遇到的坑。"><a href="#目标：-将AndFix框架部署到Android项目中。本文会带你处理遇到的坑。" class="headerlink" title="目标： 将AndFix框架部署到Android项目中。本文会带你处理遇到的坑。"></a>目标： 将AndFix框架部署到Android项目中。本文会带你处理遇到的坑。</h2><p>本文使用Android Studio，非Android Studio项目请自行解决。</p>
+<ol>
+<li><p>在build.gradle内添加 </p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span>&#123;</div><div class="line">	<span class="keyword">compile</span> <span class="string">'com.alipay.euler:andfix:0.5.0@aar'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>这时候会遇到一个问题：如果你运行了APP，可能发现代码执行System.loadLibrary()时，会报so库找不到（如果你的项目中没有包含所有平台的so库），异常名字叫 java.lang.UnsatisfiedLinkError。此时需要在build.gradle 内添加ndk声明，指定你的项目只支持哪些平台的so库。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    defaultConfig &#123;</div><div class="line">        ndk &#123;</div><div class="line">            <span class="comment">// 设置支持的 SO 库构架</span></div><div class="line">            abiFilters <span class="string">'armeabi'</span>, <span class="string">'armeabi-v7a'</span><span class="comment">//, 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'</span></div><div class="line">        &#125;</div><div class="line">......</div></pre></td></tr></table></figure>
+<p>现在Gradle Sync一下，完成后就成功引入了andFix。</p>
+</li>
+<li><p>添加一个简单的热修复工具类作为尝试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PatchHelper</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> PatchManager sPatchManager;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">PatchHelper</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Context applicationContext, String appVersion)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> != sPatchManager) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"already inited"</span>);</div><div class="line">        &#125;</div><div class="line">        sPatchManager = <span class="keyword">new</span> PatchManager(applicationContext);</div><div class="line">        sPatchManager.init(appVersion);</div><div class="line">        sPatchManager.loadPatch();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">addPatch</span><span class="params">(String patchPath)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">null</span> == sPatchManager) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"need init"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            sPatchManager.addPatch(patchPath);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你需要在Application初始化的时候，也就是onCreate()里，执行一下PatchHelper.init(getApplicationContext());<br>需要动态修复的时候，将apatch文件下载到手机存储内，执行PatchHelper.addPatch(apatch文件路径)即可完成修复。  </p>
+<p><strong><em>本文不会讲解如何使用apkpatch工具生成apatch文件并传给app的过程。请自行解决。</em></strong>   </p>
+<p>自己在一个Android项目中做了一些热修复实验，在实验过程中发现一些问题：</p>
+<p>1) 无法修改Activity中的方法，会报出错误。说是调用父类方法出java.lang.NoSuchMethodException了。<br>2) 无法修改带有System.loadLibrary(）调用的方法，会抛出java.lang.UnsatisfiedLinkError。较莫名其妙。</p>
+<p>最后自己尝试修改了一个简单类的方法行为（里面基本没啥东西，也没有继承自某个父类），成功了。</p>
+<p><strong><em>个人感觉目前这个热修复框架局限性还是比较大的，感觉也不太成熟，较容易崩溃。投放到生产环境前需要进行大量的测试覆盖（尤其是新的patch要在测试机上过一遍），且仅仅建议作为紧急用途使用。</em></strong>   </p>
+</li>
+<li><p>上面编写的工具类对PatchManager 进行了封装。浏览一下源码很容易发现它也仅仅是为com.alipay.euler.andfix.AndFixManager类封装操作一个工具类。  </p>
+<p>这个PatchManager 类实际上来说，写的并不太好。一个很简单的多进程APP场景就令PatchManager显得笨拙：它会在addPatch时将你的apatch文件拷贝到app的fileDir内。若多个进程都要更新这个apatch，addPatch方法将会拷贝多次该文件。<br>一个简单的解决方案就是自己重新实现一个PatchManager。移除掉拷贝文件到fileDir的画蛇添足操作，将apatch直接下载到fileDir。为它添加单例/多进程更新广播/网络加载等实用功能。具体不细讲。<br><strong><strong>另外</strong></strong>，AndFix热修复可能直接导致用户的APP Crash掉，并且有可能是每次开启都会Crash，这就很尴尬了。除部署严格测试和发布灰度包以外，还可以考虑在Thread.setDefaultUncaughtExceptionHandler()中处理异常，根据抛出异常的情况自己清空本次更新（或者提示用户手动清除也行）。挽回一点用户体验。</p>
+</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>AndFix部署到项目的过程虽有一些坑，总体较为简单。AndFix能火线救急，但是局限性也较大，杀伤力也很大（本来不崩溃的应用可以用AndFix强行弄崩溃了）。在不同Android适配上据说也有不小的坑（未验证过）。两个字：<strong><strong>慎用</strong></strong>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/26/Android热修复框架-AndFix在项目内部署/" data-id="cj0rqkswc0001rk3wjc4sefzr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/27/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hexo 使用说明
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/25/Android热修复框架-AndFix的初步接触/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android热修复框架: AndFix的初步接触</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/增量更新/">增量更新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/增量更新/" style="font-size: 10px;">增量更新</a> <a href="/tags/热修复/" style="font-size: 13.33px;">热修复</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Android应用的增量更新/">Android应用的增量更新</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/hello-world/">Hexo 使用说明</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/26/Android热修复框架-AndFix在项目内部署/">Android热修复框架: AndFix在项目内部署</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/25/Android热修复框架-AndFix的初步接触/">Android热修复框架: AndFix的初步接触</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/09/Java语言的新特性/">Java语言的新特性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 jiang zemin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

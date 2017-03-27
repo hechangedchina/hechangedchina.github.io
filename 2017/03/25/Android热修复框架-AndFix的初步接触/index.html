@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android热修复框架: AndFix的初步接触 | 他</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍AndFix Github: AndFix（当前版本0.5.0）是阿里推出的Android热修复方案。市面上方案较多，选择它是因为它的效果比目前市面上其他的修复方案要好（修复方案比较不是本文重点，本文仅做实践记录）。AndFix方案只能对代码进行热修复实现修复代码bug，而无法热更新资源。
+目标：在AndFix提供的Demo中使用AndFix，试验热修复Demo中的方法。Demo配置
+从Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android热修复框架: AndFix的初步接触">
+<meta property="og:url" content="http://yoursite.com/2017/03/25/Android热修复框架-AndFix的初步接触/index.html">
+<meta property="og:site_name" content="他">
+<meta property="og:description" content="介绍AndFix Github: AndFix（当前版本0.5.0）是阿里推出的Android热修复方案。市面上方案较多，选择它是因为它的效果比目前市面上其他的修复方案要好（修复方案比较不是本文重点，本文仅做实践记录）。AndFix方案只能对代码进行热修复实现修复代码bug，而无法热更新资源。
+目标：在AndFix提供的Demo中使用AndFix，试验热修复Demo中的方法。Demo配置
+从Git">
+<meta property="og:updated_time" content="2017-03-27T05:51:49.598Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android热修复框架: AndFix的初步接触">
+<meta name="twitter:description" content="介绍AndFix Github: AndFix（当前版本0.5.0）是阿里推出的Android热修复方案。市面上方案较多，选择它是因为它的效果比目前市面上其他的修复方案要好（修复方案比较不是本文重点，本文仅做实践记录）。AndFix方案只能对代码进行热修复实现修复代码bug，而无法热更新资源。
+目标：在AndFix提供的Demo中使用AndFix，试验热修复Demo中的方法。Demo配置
+从Git">
+  
+    <link rel="alternate" href="/atom.xml" title="他" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">他</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android热修复框架-AndFix的初步接触" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/25/Android热修复框架-AndFix的初步接触/" class="article-date">
+  <time datetime="2017-03-25T06:31:05.000Z" itemprop="datePublished">2017-03-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android热修复框架: AndFix的初步接触
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><strong>AndFix</strong> <a href="https://github.com/alibaba/AndFix.git" target="_blank" rel="external">Github: AndFix</a>（当前版本0.5.0）是阿里推出的Android热修复方案。<br>市面上方案较多，选择它是因为它的效果比目前市面上其他的修复方案要好（修复方案比较不是本文重点，本文仅做实践记录）。<br>AndFix方案只能对代码进行热修复实现修复代码bug，而无法热更新资源。</p>
+<h2 id="目标：在AndFix提供的Demo中使用AndFix，试验热修复Demo中的方法。"><a href="#目标：在AndFix提供的Demo中使用AndFix，试验热修复Demo中的方法。" class="headerlink" title="目标：在AndFix提供的Demo中使用AndFix，试验热修复Demo中的方法。"></a>目标：在AndFix提供的Demo中使用AndFix，试验热修复Demo中的方法。</h2><h1 id="Demo配置"><a href="#Demo配置" class="headerlink" title="Demo配置"></a>Demo配置</h1><ol>
+<li><p>从Github下载AndFix源码。</p>
+</li>
+<li><p>打开Android Studio 2.3，File-&gt;New-&gt;Import Project导入AndFix项目。</p>
+</li>
+<li><p>File-&gt;New-&gt;Import Project导入AndFixDemo项目。（在AndFix项目中sample文件夹中）。</p>
+</li>
+<li><p>AndFixDemo导入完成后，项目应该会报错。因为AndFixDemo中还没有添加AndFix库。</p>
+</li>
+<li><p>切换到AndFix项目，打开命令行，输入gradle assembleRelease编译AndFix。编译完成后在项目的build/output/aar目录找到andfix-release.aar。</p>
+</li>
+<li><p>将andfix-release.aar拷贝到AndFixDemo项目内的app/libs文件夹（若没有该文件夹，请新建）。</p>
+</li>
+<li><p>打开AndFixDemo项目的app/build.gradle文件，添加以下代码，</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">repositories</span> &#123;</div><div class="line">    <span class="keyword">flatDir</span> &#123;</div><div class="line">        dirs <span class="string">'libs'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">    <span class="keyword">compile</span>(name: <span class="string">'andfix-release'</span>, ext: <span class="string">'aar'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>然后Sync一下项目。</p>
+<p>这时候报了个错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Error:Execution failed for task &apos;:app:processDebugManifest&apos;.</div><div class="line">&gt; Manifest merger failed : uses-sdk:minSdkVersion 8 cannot be smaller than version 9 declared in library [:andfix-release:] C:\Users\anonymous\.android\build-cache\5887af3b2772a1bf81b83033920436ff6841c8de\output\AndroidManifest.xml</div><div class="line">	Suggestion: use tools:overrideLibrary=&quot;com.alipay.euler.andfix&quot; to force usage</div></pre></td></tr></table></figure>
+<p>把app/build.gradle中 android { defaultConfig { minSdkVersion从8 改为9，重新Sync。 错误消失，项目Demo配置完成。</p>
+<h2 id="上面说的是本地编译-amp-添加方法，也可以通过在build-gradle中加入以下代码引入andfix库："><a href="#上面说的是本地编译-amp-添加方法，也可以通过在build-gradle中加入以下代码引入andfix库：" class="headerlink" title="上面说的是本地编译&amp;添加方法，也可以通过在build.gradle中加入以下代码引入andfix库："></a>上面说的是本地编译&amp;添加方法，也可以通过在build.gradle中加入以下代码引入andfix库：</h2><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">	<span class="keyword">compile</span> <span class="string">'com.alipay.euler:andfix:0.5.0@aar'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="热修复使用"><a href="#热修复使用" class="headerlink" title="热修复使用"></a>热修复使用</h1><p>打开Android设备，运行Android Studio编译AndFixDemo安装App并运行。 </p>
+<p>App运行后，会执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Log.e(TAG, A.a(<span class="string">"good"</span>));</div><div class="line">Log.e(TAG, <span class="string">""</span> + <span class="keyword">new</span> A().b(<span class="string">"s1"</span>, <span class="string">"s2"</span>));</div><div class="line">Log.e(TAG, <span class="string">""</span> + <span class="keyword">new</span> A().getI());</div></pre></td></tr></table></figure>
+<p>相关类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">O</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> String s = <span class="string">"s"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">O</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.s = s;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> s;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">.......</div><div class="line">.......</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">10</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> O o = <span class="keyword">new</span> O(<span class="string">"a"</span>);</div><div class="line">    String s = <span class="string">"s"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">a</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        Log.i(<span class="string">"euler"</span>, <span class="string">"fix error"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="string">"a"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">b</span><span class="params">(String s1, String s2)</span> </span>&#123;</div><div class="line">        Log.i(<span class="string">"euler"</span>, <span class="string">"fix error"</span>);</div><div class="line">        Log.i(<span class="string">"euler"</span>, o.s);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getI</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> i;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到log输出为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">03-25 08:07:39.193 20868-20868/com.euler.andfix D/euler: inited.</div><div class="line">03-25 08:07:39.194 20868-20868/com.euler.andfix D/euler: apatch loaded.</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix I/euler: fix error</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix E/euler: a</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix I/euler: fix error</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix I/euler: a</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix E/euler: 0</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix E/euler: 10</div></pre></td></tr></table></figure>
+<p><strong><em>现在开始！！！</em></strong><br>目标：尝试修改类A的行为。</p>
+<h4 id="1-在AndFix项目根目录找到tools文件夹，解压里面的apkpatch-1-0-3-zip，得到文件夹apkpatch-1-0-3，执行一下apkpatch-bat。"><a href="#1-在AndFix项目根目录找到tools文件夹，解压里面的apkpatch-1-0-3-zip，得到文件夹apkpatch-1-0-3，执行一下apkpatch-bat。" class="headerlink" title="1. 在AndFix项目根目录找到tools文件夹，解压里面的apkpatch-1.0.3.zip，得到文件夹apkpatch-1.0.3，执行一下apkpatch.bat。"></a>1. 在AndFix项目根目录找到tools文件夹，解压里面的apkpatch-1.0.3.zip，得到文件夹apkpatch-1.0.3，执行一下apkpatch.bat。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">X:\apkpatch-1.0.3&gt;apkpatch.bat</div><div class="line">ApkPatch v1.0.3 - a tool for build/merge Android Patch file (.apatch).</div><div class="line">Copyright 2015 supern lee &lt;sanping.li@alipay.com&gt;</div><div class="line"></div><div class="line">usage: apkpatch -f &lt;new&gt; -t &lt;old&gt; -o &lt;output&gt; -k &lt;keystore&gt; -p &lt;***&gt; -a &lt;alias&gt; -e &lt;***&gt;</div><div class="line"> -a,--alias &lt;alias&gt;     alias.</div><div class="line"> -e,--epassword &lt;***&gt;   entry password.</div><div class="line"> -f,--from &lt;loc&gt;        new Apk file path.</div><div class="line"> -k,--keystore &lt;loc&gt;    keystore path.</div><div class="line"> -n,--name &lt;name&gt;       patch name.</div><div class="line"> -o,--out &lt;dir&gt;         output dir.</div><div class="line"> -p,--kpassword &lt;***&gt;   keystore password.</div><div class="line"> -t,--to &lt;loc&gt;          old Apk file path.</div><div class="line"></div><div class="line">usage: apkpatch -m &lt;apatch_path...&gt; -k &lt;keystore&gt; -p &lt;***&gt; -a &lt;alias&gt; -e &lt;***&gt;</div><div class="line"> -a,--alias &lt;alias&gt;     alias.</div><div class="line"> -e,--epassword &lt;***&gt;   entry password.</div><div class="line"> -k,--keystore &lt;loc&gt;    keystore path.</div><div class="line"> -m,--merge &lt;loc...&gt;    path of .apatch files.</div><div class="line"> -n,--name &lt;name&gt;       patch name.</div><div class="line"> -o,--out &lt;dir&gt;         output dir.</div><div class="line"> -p,--kpassword &lt;***&gt;   keystore password.</div><div class="line"></div><div class="line">X:\apkpatch-1.0.3&gt;</div></pre></td></tr></table></figure>
+<p>Demo的MainApplication模块实现了载入patch并应用的功能：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainApplication</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"euler"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String APATCH_PATH = <span class="string">"/out.apatch"</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * patch manager</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> PatchManager mPatchManager;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate();</div><div class="line">        <span class="comment">// initialize</span></div><div class="line">        mPatchManager = <span class="keyword">new</span> PatchManager(<span class="keyword">this</span>);</div><div class="line">        mPatchManager.init(<span class="string">"1.0"</span>);</div><div class="line">        Log.d(TAG, <span class="string">"inited."</span>);</div><div class="line"></div><div class="line">        <span class="comment">// load patch</span></div><div class="line">        mPatchManager.loadPatch();</div><div class="line">        Log.d(TAG, <span class="string">"apatch loaded."</span>);</div><div class="line"></div><div class="line">        <span class="comment">// add patch at runtime</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// .apatch file path</span></div><div class="line">            String patchFileString = Environment.getExternalStorageDirectory()</div><div class="line">                    .getAbsolutePath() + APATCH_PATH;</div><div class="line">            mPatchManager.addPatch(patchFileString);</div><div class="line">            Log.d(TAG, <span class="string">"apatch:"</span> + patchFileString + <span class="string">" added."</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            Log.e(TAG, <span class="string">""</span>, e);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>以上代码是AndFix的<strong><em>使用方法！！！</em></strong></p>
+<p>apkpatch工具可以为你生成一个patch文件，按照代码中描述，将apkpatch生成的patch文件放到/sdcard/out.apatch目录就可以了。<br>App启动后会将patch载入，并更新app。</p>
+<h4 id="2-生成keystore，并为apk签名。"><a href="#2-生成keystore，并为apk签名。" class="headerlink" title="2. 生成keystore，并为apk签名。"></a>2. 生成keystore，并为apk签名。</h4><p>1) 切到AndFixDemo项目，在Android Studio 中点击Build-&gt;Generated Signed Apk， 生成一个keystore命名为key.keystore保存在AndFixDemo项目根目录。<br>我这里密码是123456，alias是key，信息全部是乱写的。</p>
+<p>2) 使用Build-&gt;Generated Signed Apk编译出一个apk文件，重命名为old.apk。就放在app目录。</p>
+<p>3) 改类A为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">20</span>; <span class="comment">//从10修改到20</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> O o = <span class="keyword">new</span> O(<span class="string">"b"</span>); <span class="comment">//从"s" 修改为 "b"</span></div><div class="line">    String s = <span class="string">"s"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">a</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        Log.i(<span class="string">"euler"</span>, <span class="string">"fix success"</span>); <span class="comment">//从 "error" 修改为 "success"</span></div><div class="line">        <span class="keyword">return</span> str; <span class="comment">//从"a" 改为 str</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">b</span><span class="params">(String s1, String s2)</span> </span>&#123;</div><div class="line">        Log.i(<span class="string">"euler"</span>, <span class="string">"fix success"</span>); <span class="comment">//从 "error" 修改为 "success"</span></div><div class="line">        Log.i(<span class="string">"euler"</span>, o.s);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getI</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> i;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>4) 再使用Build-&gt;Generated Signed Apk编译出一个apk文件，重命名为new.apk。就放在app目录。</p>
+<p>5) 把<br><figure class="highlight bat"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@<span class="built_in">set</span> /p APK_PATCH=请输入apkpatch.bat路径名：</div><div class="line"><span class="variable">%APK_PATCH%</span> -f app/new.apk -t app/old.apk -o out.apatch -k key.keystore -p <span class="number">123456</span> -a key -e <span class="number">123456</span></div></pre></td></tr></table></figure></p>
+<p>存到文件patch.bat，放在AndFixDemo项目根目录。</p>
+<p>6) 执行patch.bat<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">X:\project\AndFixDemo&gt;patch</div><div class="line">请输入apkpatch.bat路径名：X:\apkpatch-1.0.3\apkpatch.bat</div><div class="line"></div><div class="line">X:\project\AndFixDemo&gt;X:\apkpatch-1.0.3\apkpatch.bat -f app/new.apk -t app/old.apk -o out.apatch -k key.keystore -p 123456 -a key -e 123456</div><div class="line">add modified Method:Ljava/lang/String;  a(Ljava/lang/String;)  in Class:Lcom/euler/test/A;</div><div class="line">add modified Method:I  b(Ljava/lang/String;Ljava/lang/String;)  in Class:Lcom/euler/test/A;</div><div class="line"></div><div class="line">X:\project\AndFixDemo&gt;</div></pre></td></tr></table></figure></p>
+<p>工具告诉我们已经做好两个方法的patch了。<br>这里apkpatch为我们生成了一个文件夹，里面放了几个文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">X:\project\AndFixDemo&gt;dir out.apatch</div><div class="line"> 驱动器 X 中的卷是 SSD</div><div class="line"> 卷的序列号是 A64D-1BE1</div><div class="line"></div><div class="line"> X:\project\AndFixDemo\out.apatch 的目录</div><div class="line"></div><div class="line">2017/03/25  19:54    &lt;DIR&gt;          .</div><div class="line">2017/03/25  19:54    &lt;DIR&gt;          ..</div><div class="line">2017/03/25  19:54             1,316 diff.dex</div><div class="line">2017/03/25  19:54             2,846 new-28ef61a629487761bedf0f2f0c4ac17f.apatch</div><div class="line">2017/03/25  19:54    &lt;DIR&gt;          smali</div><div class="line">               2 个文件          4,162 字节</div><div class="line">               3 个目录 66,200,182,784 可用字节</div><div class="line"></div><div class="line">X:\project\AndFixDemo&gt;</div></pre></td></tr></table></figure>
+<p>其中new-28ef61a629487761bedf0f2f0c4ac17f.apatch这个文件就是起作用的。</p>
+<p>我们先安装old.apk，然后运行。 日志如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">03-25 08:07:39.193 20868-20868/com.euler.andfix D/euler: inited.</div><div class="line">03-25 08:07:39.194 20868-20868/com.euler.andfix D/euler: apatch loaded.</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix I/euler: fix error</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix E/euler: a</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix I/euler: fix error</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix I/euler: a</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix E/euler: 0</div><div class="line">03-25 08:07:39.206 20868-20868/com.euler.andfix E/euler: 10</div></pre></td></tr></table></figure></p>
+<p>他现在是这么个提示。</p>
+<p>我们把new-28ef61a629487761bedf0f2f0c4ac17f.apatch上传到手机的/sdcard/out.apatch路径里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">X:\project\AndFixDemo&gt;adb push out.apatch\new-28ef61a629487761bedf0f2f0c4ac17f.apatch /sdcard/out.apatch</div><div class="line">[100%] /sdcard/out.apatch</div><div class="line"></div><div class="line">X:\project\AndFixDemo&gt;</div></pre></td></tr></table></figure>
+<p>然后再开app，发现log变了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">03-25 08:14:54.119 27167-27167/com.euler.andfix D/euler: inited.</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A.s flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 1 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A.i flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 9 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A.o flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 9 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: replace_5_1: -1354706580 , -1354706580</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A_CF.s flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 1 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A_CF.i flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 9 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A_CF.o flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 9 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: replace_5_1: 1927159936 , 1927159936</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A_CF.s flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 1 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A_CF.i flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 9 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: modify com.euler.test.A_CF.o flag:</div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/AndFix: setFieldFlag_5_1: 9 </div><div class="line">03-25 08:14:54.128 27167-27167/com.euler.andfix D/euler: apatch loaded.</div><div class="line">03-25 08:14:54.139 27167-27167/com.euler.andfix I/euler: fix success</div><div class="line">03-25 08:14:54.139 27167-27167/com.euler.andfix E/euler: good</div><div class="line">03-25 08:14:54.139 27167-27167/com.euler.andfix I/euler: fix success</div><div class="line">03-25 08:14:54.139 27167-27167/com.euler.andfix I/euler: a</div><div class="line">03-25 08:14:54.139 27167-27167/com.euler.andfix E/euler: 0</div><div class="line">03-25 08:14:54.139 27167-27167/com.euler.andfix E/euler: 10</div></pre></td></tr></table></figure></p>
+<p>可以看到里面的两个方法调用的确修改成功了，但是改动的两个静态变量的影响没有到andFix里面。  </p>
+<p>通过观察日志可以做出猜测：里面有两个replace，应该代表修改了两个方法名字。</p>
+<p>用命令把/sdcard/out.apatch给删掉，发现log依旧是修复过的。框架应该已经把修改应用到app里了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>AndFix项目提供了一个Demo，Demo已经实现了patch的代码流程。<br>本文的实验修改了Demo中的类，并用工具通过比较新老app生成更新patch。<br>可以看到AndFix框架读取到更新patch后成功的修复了类内的一个类方法和对象方法，而对类变量修改却无效。<br>若在项目内部署了这样一个热更新框架，的确能够实现远程无声修bug。</p>
+<h2 id="若想应用AndFix到生产环境，还需要"><a href="#若想应用AndFix到生产环境，还需要" class="headerlink" title="若想应用AndFix到生产环境，还需要"></a>若想应用AndFix到生产环境，还需要</h2><p>1) 大概了解内部原理机制<br>2) 编写测试代码测试它的修改生效范围<br>3) MultiDex对它的影响<br>4) 代码混淆</p>
+<h2 id="不过这篇文章的目标已经达成了。"><a href="#不过这篇文章的目标已经达成了。" class="headerlink" title="不过这篇文章的目标已经达成了。"></a>不过这篇文章的目标已经达成了。</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/25/Android热修复框架-AndFix的初步接触/" data-id="cj0rqkswi0003rk3w46tyfrsn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/26/Android热修复框架-AndFix在项目内部署/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android热修复框架: AndFix在项目内部署
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/09/Java语言的新特性/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java语言的新特性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/增量更新/">增量更新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/增量更新/" style="font-size: 10px;">增量更新</a> <a href="/tags/热修复/" style="font-size: 13.33px;">热修复</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Android应用的增量更新/">Android应用的增量更新</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/hello-world/">Hexo 使用说明</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/26/Android热修复框架-AndFix在项目内部署/">Android热修复框架: AndFix在项目内部署</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/25/Android热修复框架-AndFix的初步接触/">Android热修复框架: AndFix的初步接触</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/09/Java语言的新特性/">Java语言的新特性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 jiang zemin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

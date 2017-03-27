@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java语言的新特性 | 他</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="从官方文档上学习了一下从Java5到Java8各个版本的语言新特性, 在此总结.
+Java8*lambda表达式可以把一个函数式接口写作lambda表达式12345678910//常规写法new Thread(new Runnable() &amp;#123;  @Override  public void run() &amp;#123;    //do sth  &amp;#125;&amp;#125;).start();/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语言的新特性">
+<meta property="og:url" content="http://yoursite.com/2016/12/09/Java语言的新特性/index.html">
+<meta property="og:site_name" content="他">
+<meta property="og:description" content="从官方文档上学习了一下从Java5到Java8各个版本的语言新特性, 在此总结.
+Java8*lambda表达式可以把一个函数式接口写作lambda表达式12345678910//常规写法new Thread(new Runnable() &amp;#123;  @Override  public void run() &amp;#123;    //do sth  &amp;#125;&amp;#125;).start();/">
+<meta property="og:updated_time" content="2017-03-27T05:51:49.605Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java语言的新特性">
+<meta name="twitter:description" content="从官方文档上学习了一下从Java5到Java8各个版本的语言新特性, 在此总结.
+Java8*lambda表达式可以把一个函数式接口写作lambda表达式12345678910//常规写法new Thread(new Runnable() &amp;#123;  @Override  public void run() &amp;#123;    //do sth  &amp;#125;&amp;#125;).start();/">
+  
+    <link rel="alternate" href="/atom.xml" title="他" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">他</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java语言的新特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/09/Java语言的新特性/" class="article-date">
+  <time datetime="2016-12-09T02:30:34.000Z" itemprop="datePublished">2016-12-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java语言的新特性
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>从<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/language/enhancements.html" target="_blank" rel="external">官方文档</a>上学习了一下从Java5到Java8各个版本的语言新特性, 在此总结.</p>
+<h2 id="Java8"><a href="#Java8" class="headerlink" title="Java8"></a>Java8</h2><h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="*lambda表达式"></a><a href="http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html" target="_blank" rel="external">*lambda表达式</a></h3><p>可以把一个<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/FunctionalInterface.html" target="_blank" rel="external">函数式接口</a>写作lambda表达式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//常规写法</span></div><div class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">//do sth</span></div><div class="line">  &#125;</div><div class="line">&#125;).start();</div><div class="line"></div><div class="line"><span class="comment">//lambda表达式写法</span></div><div class="line"><span class="keyword">new</span> Thread(()-&gt;&#123;<span class="comment">/*do sth*/</span>&#125;).start();</div></pre></td></tr></table></figure></p>
+<p>lambda表达式也支持以下特性</p>
+<ul>
+<li><p><a href="http://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html" target="_blank" rel="external">方法引用</a>: 已有名称的方法可以用紧凑的,容易阅读的lambda表达式来表现  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">	......</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">compareByAge</span><span class="params">(Person a, Person b)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> a.birthday.compareTo(b.birthday);</div><div class="line">    &#125;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person[] rosterAsArray = roster.toArray(<span class="keyword">new</span> Person[roster.size()]);</div><div class="line"></div><div class="line"><span class="comment">//常规写法        </span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PersonAgeComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">Person</span>&gt; </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Person a, Person b)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> a.getBirthday().compareTo(b.getBirthday());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Arrays.sort(rosterAsArray, <span class="keyword">new</span> PersonAgeComparator());</div><div class="line"></div><div class="line"><span class="comment">//lambda表达式写法</span></div><div class="line">Arrays.sort(rosterAsArray,</div><div class="line">    (Person a, Person b) -&gt; &#123;</div><div class="line">        <span class="keyword">return</span> a.getBirthday().compareTo(b.getBirthday());</div><div class="line">    &#125;</div><div class="line">);</div><div class="line"></div><div class="line"><span class="comment">//lambda表达式写法</span></div><div class="line">Arrays.sort(rosterAsArray,</div><div class="line">    (a, b) -&gt; Person.compareByAge(a, b)</div><div class="line">);</div><div class="line"></div><div class="line"><span class="comment">//方法引用写法</span></div><div class="line">Arrays.sort(rosterAsArray, Person::compareByAge);</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html" target="_blank" rel="external">默认方法</a>: 可以在interface内添加使用default关键字修饰的具有实现的方法, 它和旧版本的interface是兼容的;<br>并且可以在interface中定义静态(static)方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">I</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">void</span> <span class="title">a</span><span class="params">()</span></span>;</div><div class="line">  <span class="comment">//静态方法</span></div><div class="line">  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">b</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">//do sth</span></div><div class="line">  &#125;</div><div class="line">  <span class="comment">//默认方法</span></div><div class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">c</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">//do sth</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/lambda_api_jdk8.html" target="_blank" rel="external">新api的增强</a>: 加入一些支持lambda表达式的包如<a href="http://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html" target="_blank" rel="external">java.util.function</a>, <a href="http://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html" target="_blank" rel="external">java.util.stream</a>.<br>另外在<a href="http://docs.oracle.com/javase/8/docs/api/java/util/Collection.html" target="_blank" rel="external">java.util.Collection</a>接口中增加了一个default方法 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">default</span> Stream&lt;E&gt; <span class="title">stream</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>为集合提供流操作</p>
+<h3 id="改进的类型推断"><a href="#改进的类型推断" class="headerlink" title="*改进的类型推断"></a>*改进的<a href="http://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html" target="_blank" rel="external">类型推断</a></h3><p>现在类型推断可以通过目标类型推断出泛型方法调用的类型参数. Java7可以对赋值语句使用类型推断, 而在Java8中会对更多的上下文中的目标类型进行类型推断.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; stringList = <span class="keyword">new</span> ArrayList&lt;&gt;(); <span class="comment">//Java7特性: 对泛型实例创建进行类型推断</span></div><div class="line">stringList.add(<span class="string">"A"</span>);</div><div class="line">stringList.addAll(Arrays.asList());  <span class="comment">//Java8 特性: 可以从方法参数的类型参数来进行类型推断</span></div></pre></td></tr></table></figure>
+<h3 id="类型注解"><a href="#类型注解" class="headerlink" title="*类型注解"></a><a href="http://docs.oracle.com/javase/tutorial/java/annotations/basics.html" target="_blank" rel="external">*类型注解</a></h3><p>现在可以在任何使用类型的地方应用注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@NonNull</span> String str;</div><div class="line"><span class="comment">//实例创建</span></div><div class="line"><span class="keyword">new</span> <span class="meta">@Interned</span> MyObject();</div><div class="line"><span class="comment">//类型转换</span></div><div class="line">myString = (<span class="meta">@NonNull</span> String) str;</div><div class="line"><span class="comment">//接口实现</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnmodifiableList</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span></span></div><div class="line">       @<span class="title">Readonly</span> <span class="title">List</span>&lt;@<span class="title">Readonly</span> <span class="title">T</span>&gt; &#123; ... &#125;</div><div class="line"><span class="comment">//异常声明</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">monitorTemperature</span><span class="params">()</span> <span class="keyword">throws</span></span></div><div class="line">       @Critical TemperatureException &#123; ... &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="重复注解"><a href="#重复注解" class="headerlink" title="*重复注解"></a><a href="http://docs.oracle.com/javase/tutorial/java/annotations/repeating.html" target="_blank" rel="external">*重复注解</a></h3><p>可以在一个类型定义上重复的使用多次注解(加入了@Repeatable注解类型)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Schedules &#123;</div><div class="line">    Schedule[] value();</div><div class="line">&#125;</div><div class="line">....</div><div class="line"><span class="meta">@Repeatable</span>(Schedules.class)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Schedule &#123;</div><div class="line">  <span class="function">String <span class="title">dayOfMonth</span><span class="params">()</span> <span class="keyword">default</span> "first"</span>;</div><div class="line">  <span class="function">String <span class="title">dayOfWeek</span><span class="params">()</span> <span class="keyword">default</span> "Mon"</span>;</div><div class="line">  <span class="function"><span class="keyword">int</span> <span class="title">hour</span><span class="params">()</span> <span class="keyword">default</span> 12</span>;</div><div class="line">&#125;</div><div class="line">...</div><div class="line"><span class="meta">@Schedule</span>(dayOfMonth=<span class="string">"last"</span>)</div><div class="line"><span class="meta">@Schedule</span>(dayOfWeek=<span class="string">"Fri"</span>, hour=<span class="string">"23"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPeriodicCleanup</span><span class="params">()</span> </span>&#123; ... &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="方法参数反射"><a href="#方法参数反射" class="headerlink" title="*方法参数反射"></a><a href="http://docs.oracle.com/javase/tutorial/reflect/member/methodparameterreflection.html" target="_blank" rel="external">*方法参数反射</a></h3><p>现在可以使用<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Executable.html#getParameters" target="_blank" rel="external">java.lang.reflect.Executable.getParameters</a>得到<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Constructor.html" target="_blank" rel="external">构造器</a>,和<a href="http://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html" target="_blank" rel="external">方法</a>的参数表<br>(Executable是构造器和方法的父类)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Method method = ...;</div><div class="line">method.getParameters();</div><div class="line"></div><div class="line">Constructor constructor = ...;</div><div class="line">constructor.getParameters();</div></pre></td></tr></table></figure>
+<h2 id="Java7"><a href="#Java7" class="headerlink" title="Java7"></a>Java7</h2><h3 id="二进制字面常量"><a href="#二进制字面常量" class="headerlink" title="*二进制字面常量"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/binary-literals.html" target="_blank" rel="external">*二进制字面常量</a></h3><p>可以使用二进制字面常量来表达整形类型(byte, short, int, long), 以0b(0B)作为前缀<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">System.out.println(<span class="number">0b11</span>); <span class="comment">// 3</span></div><div class="line">System.out.println(<span class="number">0B111</span>); <span class="comment">// 7</span></div></pre></td></tr></table></figure></p>
+<h3 id="字面常量数字的下划线"><a href="#字面常量数字的下划线" class="headerlink" title="*字面常量数字的下划线"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/underscores-literals.html" target="_blank" rel="external">*字面常量数字的下划线</a></h3><p>在数字常量中可以使用下划线来提高数字的可读性, 不能将下划线添加在数字头尾部<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">System.out.println(<span class="number">11_1</span>); <span class="comment">// 111</span></div><div class="line">System.out.println(<span class="number">011_1</span>); <span class="comment">// 73</span></div><div class="line">System.out.println(<span class="number">0x11_1</span>); <span class="comment">// 273</span></div><div class="line">System.out.println(<span class="number">0B11_1</span>); <span class="comment">// 7</span></div></pre></td></tr></table></figure></p>
+<h3 id="String类可以用于switch语句"><a href="#String类可以用于switch语句" class="headerlink" title="*String类可以用于switch语句"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/strings-switch.html" target="_blank" rel="external">*String类可以用于switch语句</a></h3><p>这里case语句中的statement只能使用常量字符串<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">String str = <span class="keyword">new</span> String(<span class="string">"aaa"</span>);</div><div class="line"><span class="keyword">switch</span> (str) &#123;</div><div class="line">    <span class="keyword">case</span> <span class="string">"aaa"</span>:</div><div class="line">        System.out.println(<span class="keyword">true</span>);</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">case</span> <span class="string">"bbb"</span>:</div><div class="line">        System.out.println(<span class="keyword">false</span>);</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="泛型实例创建的类型推断"><a href="#泛型实例创建的类型推断" class="headerlink" title="*泛型实例创建的类型推断"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/type-inference-generic-instance-creation.html" target="_blank" rel="external">*泛型实例创建的类型推断</a></h3><p>只要编译器可以根据上下文推断出泛型实例的类型参数, 在调用泛型类型的构造器时可以用&lt;&gt;(学名叫做菱形”diamond”)来替代指定类型参数.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">List&lt;Integer&gt; integerList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div></pre></td></tr></table></figure></p>
+<h3 id="优化变长参数的方法调用"><a href="#优化变长参数的方法调用" class="headerlink" title="*优化变长参数的方法调用"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/non-reifiable-varargs.html" target="_blank" rel="external">*优化变长参数的方法调用</a></h3><p>在变长参数中使用不可具体化的类型(例如List<string>)时, 编译器会报出警告, 该警告可以被<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SafeVarargs</span></div></pre></td></tr></table></figure></string></p>
+<p>和<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SuppressWarnings</span>(&#123;<span class="string">"unchecked"</span>, <span class="string">"varargs"</span>&#125;)</div></pre></td></tr></table></figure></p>
+<p>抑制.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//Main.java</span></div><div class="line">...</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        List&lt;String&gt; a = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">        fun(a, a);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">fun</span><span class="params">(T... args)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (T t : args) &#123;</div><div class="line">            System.out.println(t);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> args[<span class="number">0</span>];</div><div class="line">    &#125;</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>使用java6 编译Main.java 加上 -Xlint:unchecked参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">jdk1.6.0_45\bin\javac.exe -Xlint:unchecked Main.java</div><div class="line">Main.java:38: 警告：[unchecked] 对于 varargs 参数，类型 java.util.List&lt;java.lang.String&gt;[] 的泛型数组创建未经检查</div><div class="line">        fun(a, a);</div><div class="line">           ^</div><div class="line">1 警告</div></pre></td></tr></table></figure></p>
+<p>使用java7 编译Main.java 加上 -Xlint:unchecked参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">jdk1.7.0_80\bin\javac.exe -Xlint:unchecked Main.java</div><div class="line">Main.java:32: 警告: [unchecked] 对于类型为List&lt;String&gt;[]的 varargs 参数, 泛型数组创建未经过检查</div><div class="line">        fun(a, a);</div><div class="line">           ^</div><div class="line">Main.java:35: 警告: [unchecked] 参数化 vararg 类型T的堆可能已受污染</div><div class="line">    public static &lt;T&gt; T fun(T... args) &#123;</div><div class="line">                                 ^</div><div class="line">  其中, T是类型变量:</div><div class="line">    T扩展已在方法 &lt;T&gt;fun(T...)中声明的Object</div><div class="line">2 个警告</div></pre></td></tr></table></figure></p>
+<p>添加 @SafeVarargs<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SafeVarargs</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">fun</span><span class="params">(T... args)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (T t : args) &#123;</div><div class="line">        System.out.println(t);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> args[<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编译器警告消失</p>
+<p>添加 @SuppressWarnings({“unchecked”, “varargs”}),<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">jdk1.7.0_80\bin\javac.exe -Xlint:unchecked Main.java</div><div class="line">Main.java:32: 警告: [unchecked] 对于类型为List&lt;String&gt;[]的 varargs 参数, 泛型数组创建未经过检查</div><div class="line">        fun(a, a);</div><div class="line">           ^</div><div class="line">1 个警告</div></pre></td></tr></table></figure></p>
+<h3 id="try-with-resource"><a href="#try-with-resource" class="headerlink" title="*try_with_resource"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/try-with-resources.html" target="_blank" rel="external">*try_with_resource</a></h3><p>使用try_with_resource语句, 可以对实现了AutoCloseable(java7 加入的接口, 原有的Closeable成为它的子类) 的资源进行自动关闭, 而不用手动在finally语句块中关闭.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//常规写法</span></div><div class="line"><span class="function"><span class="keyword">static</span> String <span class="title">readFirstLineFromFileWithFinallyBlock</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">  BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(path));</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">return</span> br.readLine();</div><div class="line">  &#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="keyword">if</span> (br != <span class="keyword">null</span>) br.close();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//try_with_resource</span></div><div class="line"><span class="function"><span class="keyword">static</span> String <span class="title">readFirstLineFromFile</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">  <span class="keyword">try</span> (BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(path))) &#123;</div><div class="line">    <span class="keyword">return</span> br.readLine();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//try_with_resource</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">writeToFileZipFileContents</span><span class="params">(String zipFileName, String outputFileName)</span></span></div><div class="line">        <span class="keyword">throws</span> java.io.IOException &#123;</div><div class="line"></div><div class="line">    java.nio.charset.Charset charset = java.nio.charset.StandardCharsets.US_ASCII;</div><div class="line">    java.nio.file.Path outputFilePath = java.nio.file.Paths.get(outputFileName);</div><div class="line"></div><div class="line">    <span class="comment">// Open zip file and create output file with try-with-resources statement</span></div><div class="line"></div><div class="line">    <span class="keyword">try</span> (</div><div class="line">            java.util.zip.ZipFile zf = <span class="keyword">new</span> java.util.zip.ZipFile(zipFileName);</div><div class="line">            java.io.BufferedWriter writer = java.nio.file.Files.newBufferedWriter(outputFilePath, charset)</div><div class="line">    ) &#123;</div><div class="line"></div><div class="line">        <span class="comment">// Enumerate each entry</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> (java.util.Enumeration entries = zf.entries(); entries.hasMoreElements(); ) &#123;</div><div class="line"></div><div class="line">            <span class="comment">// Get the entry name and write it to the output file</span></div><div class="line"></div><div class="line">            String newLine = System.getProperty(<span class="string">"line.separator"</span>);</div><div class="line">            String zipEntryName = ((java.util.zip.ZipEntry) entries.nextElement()).getName() + newLine;</div><div class="line">            writer.write(zipEntryName, <span class="number">0</span>, zipEntryName.length());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里需要注意的是: </p>
+<ul>
+<li>若try语句块抛出异常, 则在try_with_resource关闭资源调用AutoCloseable.close()时抛出的IOException会被抑制, catch到的异常将是try语句块抛出的异常. 这里可以调用Throwable.getSuppressed()获取被抑制的异常. </li>
+<li>在使用finally语句块中关闭资源时, 若try语句块抛出了异常, 则在finally语句块中抛出的IOException异常会覆盖掉try语句块中抛出的异常.</li>
+<li>Closeable 是java5加入的关闭资源的方法, 多次调用Closeable.close()关闭资源不会引发错误</li>
+<li>AutoCloseable 是java7加入的关闭资源的方法, 仅允许调用一次AutoCloseable.close();</li>
+</ul>
+<h3 id="多重异常捕获-amp-优化对重抛出异常的类型检查"><a href="#多重异常捕获-amp-优化对重抛出异常的类型检查" class="headerlink" title="* 多重异常捕获&amp;优化对重抛出异常的类型检查"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/catch-multiple.html" target="_blank" rel="external">* 多重异常捕获&amp;优化对重抛出异常的类型检查</a></h3><p>多重异常捕获<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//之前的写法</span></div><div class="line"><span class="keyword">catch</span> (IOException ex) &#123;</div><div class="line">     logger.log(ex);</div><div class="line">     <span class="keyword">throw</span> ex;</div><div class="line">&#125; <span class="keyword">catch</span> (SQLException ex) &#123;</div><div class="line">     logger.log(ex);</div><div class="line">     <span class="keyword">throw</span> ex;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//现在可以这样写</span></div><div class="line"><span class="keyword">catch</span> (IOException|SQLException ex) &#123;</div><div class="line">    logger.log(ex);</div><div class="line">    <span class="keyword">throw</span> ex;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>重抛出更精确描述的异常, 在java7之前的版本不允许这样写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rethrowException</span><span class="params">(String exceptionName)</span></span></div><div class="line">        <span class="keyword">throws</span> IOException, NullPointerException &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        <span class="comment">//在这里重抛出类型只能为IOException, NullPointerException, </span></div><div class="line">        <span class="comment">//若有其他类型, 必须在throw子句中声明</span></div><div class="line">        <span class="keyword">throw</span> e;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Java6"><a href="#Java6" class="headerlink" title="Java6"></a>Java6</h2><p>java6 在语言方面没有改动, 主要改动在新增了一些包之类的.</p>
+<h2 id="Java5"><a href="#Java5" class="headerlink" title="Java5"></a>Java5</h2><h3 id="泛型"><a href="#泛型" class="headerlink" title="*泛型"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/generics.html" target="_blank" rel="external">*泛型</a></h3><p>这种期待已久的对类型系统的增强允许类型或方法对各种类型的对象进行操作，同时提供编译时类型的安全性。它将编译器类型安全添加到集合框架中, 消除了类型转换的苦差事.<br>Java中的泛型和C++的模板看上去很相似, 但这相似性是肤浅的: Java的泛型的实现机制是类型擦除, 并不支持泛型对象实例化以及模板元编程.</p>
+<p>Java5之前的集合操作写法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Removes 4-letter words from c. Elements must be strings</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">expurgate</span><span class="params">(Collection c)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (Iterator i = c.iterator(); i.hasNext(); )</div><div class="line">      <span class="keyword">if</span> (((String) i.next()).length() == <span class="number">4</span>)</div><div class="line">        i.remove();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用泛型的集合操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Removes the 4-letter words from c</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">expurgate</span><span class="params">(Collection&lt;String&gt; c)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (Iterator&lt;String&gt; i = c.iterator(); i.hasNext(); )</div><div class="line">      <span class="keyword">if</span> (i.next().length() == <span class="number">4</span>)</div><div class="line">        i.remove();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>更多的泛型方面资料需参考官方文档和书籍学习.</p>
+<h3 id="For-each"><a href="#For-each" class="headerlink" title="*For-each"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/foreach.html" target="_blank" rel="external">*For-each</a></h3><p>这个循环的新特性能让你更方便的迭代遍历数组和集合<br>Java5之前的写法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">cancelAll</span><span class="params">(Collection&lt;TimerTask&gt; c)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (Iterator&lt;TimerTask&gt; i = c.iterator(); i.hasNext(); )</div><div class="line">        i.next().cancel();</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (Iterator i = suits.iterator(); i.hasNext(); ) &#123;</div><div class="line">    Suit suit = (Suit) i.next();</div><div class="line">    <span class="keyword">for</span> (Iterator j = ranks.iterator(); j.hasNext(); )</div><div class="line">        sortedDeck.add(<span class="keyword">new</span> Card(suit, j.next()));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>ForEach写法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">cancelAll</span><span class="params">(Collection&lt;TimerTask&gt; c)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span> (TimerTask t : c)</div><div class="line">        t.cancel();</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (Suit suit : suits)</div><div class="line">    <span class="keyword">for</span> (Rank rank : ranks)</div><div class="line">        sortedDeck.add(<span class="keyword">new</span> Card(suit, rank));</div></pre></td></tr></table></figure></p>
+<p>数组的ForEach操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> result = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i : a)</div><div class="line">        result += i;</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="自动装箱-拆箱"><a href="#自动装箱-拆箱" class="headerlink" title="*自动装箱/拆箱"></a><a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html" target="_blank" rel="external">*自动装箱/拆箱</a></h3><p>Java5会在需要的时候自动在基本类型和相应的包装类型之间进行转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">List&lt;Integer&gt; li = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">50</span>; i += <span class="number">2</span>)</div><div class="line">    li.add(i);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sumEven</span><span class="params">(List&lt;Integer&gt; li)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (Integer i: li)</div><div class="line">        <span class="keyword">if</span> (i % <span class="number">2</span> == <span class="number">0</span>)</div><div class="line">            sum += i;</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其实是<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">List&lt;Integer&gt; li = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">50</span>; i += <span class="number">2</span>)</div><div class="line">    li.add(Integer.valueOf(i));</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sumEven</span><span class="params">(List&lt;Integer&gt; li)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (Integer i : li)</div><div class="line">        <span class="keyword">if</span> (i.intValue() % <span class="number">2</span> == <span class="number">0</span>)</div><div class="line">            sum += i.intValue();</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这个转换过程被编译器自动完成了</p>
+<h3 id="类型安全枚举"><a href="#类型安全枚举" class="headerlink" title="*类型安全枚举"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/enums.html" target="_blank" rel="external">*类型安全枚举</a></h3><p>在java的以往版本中实现枚举模式通常使用整形常数, 这会带来很多问题:</p>
+<ul>
+<li>类型不安全: 它可以当做数字使用</li>
+<li>无名字空间: 必须在名字上添加前缀以同其他枚举区分</li>
+<li>较脆弱: 如果改变了枚举的顺序或者增加新的枚举, 就需要重新编译所有代码以保证不会出现未定义行为</li>
+<li>不直观: 输出枚举值的Log打印出来的仅仅只是int, 不能直观的表达任何信息</li>
+</ul>
+<p>新增的关键字enum可以定义一个无法被实例化和继承(final)的类, 在这个类里可以定义一系列作为枚举值的常量供用户使用. 类型安全枚举的好处:</p>
+<ul>
+<li>枚举常量是枚举类的实例, 他是类型安全且不会和其他枚举类型发生冲突的. </li>
+<li>增加了新的枚举常量也不会影响到原有代码的正常工作</li>
+<li>枚举常量使用toString()可以输出直接常量字面值, 更加直观.</li>
+<li>用户可以在枚举类中定义一些枚举变量可以使用的方法, 让程序逻辑更加清晰.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Operation &#123;</div><div class="line">  PLUS   &#123; <span class="function"><span class="keyword">double</span> <span class="title">eval</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123; <span class="keyword">return</span> x + y; &#125; &#125;,</div><div class="line">  MINUS  &#123; <span class="function"><span class="keyword">double</span> <span class="title">eval</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123; <span class="keyword">return</span> x - y; &#125; &#125;,</div><div class="line">  TIMES  &#123; <span class="function"><span class="keyword">double</span> <span class="title">eval</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123; <span class="keyword">return</span> x * y; &#125; &#125;,</div><div class="line">  DIVIDE &#123; <span class="function"><span class="keyword">double</span> <span class="title">eval</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span> </span>&#123; <span class="keyword">return</span> x / y; &#125; &#125;;</div><div class="line"></div><div class="line">  <span class="comment">// Do arithmetic op represented by this constant</span></div><div class="line">  <span class="function"><span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">eval</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">    <span class="keyword">double</span> x = Double.parseDouble(args[<span class="number">0</span>]);</div><div class="line">    <span class="keyword">double</span> y = Double.parseDouble(args[<span class="number">1</span>]);</div><div class="line">    <span class="keyword">for</span> (Operation op : Operation.values())</div><div class="line">        System.out.printf(<span class="string">"%f %s %f = %f%n"</span>, x, op, y, op.eval(x, y));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$ java Operation 4 2</div><div class="line">4.000000 PLUS 2.000000 = 6.000000</div><div class="line">4.000000 MINUS 2.000000 = 2.000000</div><div class="line">4.000000 TIMES 2.000000 = 8.000000</div><div class="line">4.000000 DIVIDE 2.000000 = 2.000000</div></pre></td></tr></table></figure>
+<p>在Effective Java的第21条提到用类代替enum结构, 其内容讲的就是实现一种”类型安全枚举”的模型, 用这种更安全的枚举模型来替代原有的类C语言的枚举.而Java5直接在语言层面实现了这种类型安全的枚举模型.在没有极其苛刻的性能要求的情况下(如果你的JVM不是运行在蜂窝电话或者烤面包机上),类型安全枚举带来的额外开销(装载枚举类以及构造常量对象)不会引起用户注意.</p>
+<h3 id="变长参数"><a href="#变长参数" class="headerlink" title="*变长参数"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/varargs.html" target="_blank" rel="external">*变长参数</a></h3><p>方法调用的最后一个参数允许使用变长参数, 消除了用户手动创建数组打包参数传入方法的痛苦.</p>
+<p>Java5以前想要格式化字符串只能这样写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Object[] arguments = &#123;</div><div class="line">    <span class="keyword">new</span> Integer(<span class="number">7</span>),</div><div class="line">    <span class="keyword">new</span> Date(),</div><div class="line">    <span class="string">"a disturbance in the Force"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">String result = MessageFormat.format(</div><div class="line">    <span class="string">"At &#123;1,time&#125; on &#123;1,date&#125;, there was &#123;2&#125; on planet "</span></div><div class="line">     + <span class="string">"&#123;0,number,integer&#125;."</span>, arguments);</div></pre></td></tr></table></figure></p>
+<p>而现在<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String result = MessageFormat.format(</div><div class="line">    <span class="string">"At &#123;1,time&#125; on &#123;1,date&#125;, there was &#123;2&#125; on planet "</span></div><div class="line">    + <span class="string">"&#123;0,number,integer&#125;."</span>,</div><div class="line">    <span class="number">7</span>, <span class="keyword">new</span> Date(), <span class="string">"a disturbance in the Force"</span>);</div></pre></td></tr></table></figure></p>
+<p>在Java5里String类基于变长参数的特性提供了新的api, format(). 如果阅读一下源码会发现它直接调用MessageFormat.format()做格式串生成.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">format</span><span class="params">(String pattern,</span></span></div><div class="line">                                Object... arguments);</div></pre></td></tr></table></figure></p>
+<h3 id="静态导入"><a href="#静态导入" class="headerlink" title="*静态导入"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/static-import.html" target="_blank" rel="external">*静态导入</a></h3><p>导入类内所有静态成员到当前名字空间, 不需要添加类前缀即可引用被导入的静态成员. 官方建议谨慎和适当的使用静态导入以免污染名字空间以及破坏程序的可读性和可维护性.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">double</span> r = Math.cos(Math.PI * theta);</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Math.*;</div><div class="line"><span class="keyword">double</span> r = cos(PI * theta);</div></pre></td></tr></table></figure>
+<h3 id="注解"><a href="#注解" class="headerlink" title="*注解"></a><a href="http://docs.oracle.com/javase/8/docs/technotes/guides/language/annotations.html" target="_blank" rel="external">*注解</a></h3><p>这个新特性可以让程序员在代码中使用声明式编程: 在代码中添加注解, 用工具从注解中生成代码. 这种特性可以极大的减少程序员的工作量. 参考库ButterKnife. 此外程序本身也可以通过反射获取属性和方法的注解信息.<br>定义注解以及使用:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> RequestForEnhancement &#123;</div><div class="line">    <span class="function"><span class="keyword">int</span>    <span class="title">id</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">String <span class="title">synopsis</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">String <span class="title">engineer</span><span class="params">()</span> <span class="keyword">default</span> "[unassigned]"</span>; </div><div class="line">    <span class="function">String <span class="title">date</span><span class="params">()</span>    <span class="keyword">default</span> "[unimplemented]"</span>; </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@RequestForEnhancement</span>(</div><div class="line">    id       = <span class="number">2868724</span>,</div><div class="line">    synopsis = <span class="string">"Enable time-travel"</span>,</div><div class="line">    engineer = <span class="string">"Mr. Peabody"</span>,</div><div class="line">    date     = <span class="string">"4/1/3007"</span></div><div class="line">)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">travelThroughTime</span><span class="params">(Date destination)</span> </span>&#123; ... &#125;</div></pre></td></tr></table></figure></p>
+<p>更多的注解方面资料需参考官方文档和书籍学习.</p>
+<hr>
+<p>感想: Java5之前的Java程序员真辛苦</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/12/09/Java语言的新特性/" data-id="cj0rqkswk0004rk3w5ti2p60f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/25/Android热修复框架-AndFix的初步接触/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android热修复框架: AndFix的初步接触
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/增量更新/">增量更新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/增量更新/" style="font-size: 10px;">增量更新</a> <a href="/tags/热修复/" style="font-size: 13.33px;">热修复</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/27/Android应用的增量更新/">Android应用的增量更新</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/hello-world/">Hexo 使用说明</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/26/Android热修复框架-AndFix在项目内部署/">Android热修复框架: AndFix在项目内部署</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/25/Android热修复框架-AndFix的初步接触/">Android热修复框架: AndFix的初步接触</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/09/Java语言的新特性/">Java语言的新特性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 jiang zemin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
