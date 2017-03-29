@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,62 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-一句话的Android增量更新框架" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/29/一句话的Android增量更新框架/" class="article-date">
+  <time datetime="2017-03-29T01:05:37.000Z" itemprop="datePublished">2017-03-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/29/一句话的Android增量更新框架/">一句话的Android增量更新框架</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android应用更新要使用完整的新版本Apk安装，增量更新则是提供一个新旧版本偏差数据的patch包供应用下载，然后Android应用本地使用patch包和本地apk合成新版本apk。而patch包的体积通常都远小于新版本的apk，可以为用户节省流量和下载时间，节省时间就是<strong>延续生命</strong>，所以增量更新十分实用。</p>
+<p>一些学习文章：<br>  <a href="https://hechangedchina.github.io/2017/03/27/Android%E5%BA%94%E7%94%A8%E7%9A%84%E5%A2%9E%E9%87%8F%E6%9B%B4%E6%96%B0/" target="_blank" rel="external">Android应用的增量更新</a><br>  <a href="http://blog.csdn.net/lmj623565791/article/details/52761658" target="_blank" rel="external">Android 增量更新完全解析 是增量不是热修复</a></p>
+<p>资料里十分详细的介绍了如何在你自己的Android项目中部署增量更新功能，而实际上这个部署过程对新手来说是复杂而浪费时间的。它需要做配置NDK，并移植bsdiff/bspatch工具到Android系统，编写jni调用等麻烦事，<strong>这是坠痛苦的</strong>。</p>
+<p><strong><em>I am Angry！！！ 你们这样搞是不行的！！！</em></strong></p>
+<p>应运而生的<strong>BigNews框架</strong>（Github: <a href="https://github.com/ha-excited/BigNews" target="_blank" rel="external">ha-excited/BigNews</a>）为你省去了麻烦的增量更新部署过程，无需添加代码配置文件以及NDK编译，你只需要：</p>
+<ol>
+<li><p>在你项目根build.gradle添加代码：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">allprojects</span> &#123;</div><div class="line">    <span class="keyword">repositories</span> &#123;</div><div class="line">        ...</div><div class="line">        maven &#123; url <span class="string">'https://jitpack.io'</span> &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在你项目模块内的build.gradle添加代码，然后Gradle Sync：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">    <span class="keyword">compile</span> <span class="string">'com.github.ha-excited:BigNews:0.1.1'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载到patch文件后，你只需要写一句话，就可以合成新版本apk了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String oldApkPath = ...;</div><div class="line">String newApkPath = ...;</div><div class="line">String patchPath = ...;</div><div class="line"><span class="comment">//我就说一句话，这是坠吼的！</span></div><div class="line">BigNews.make(oldApkPath, newApkPath, patchPath);</div><div class="line"><span class="comment">//已经弄出了一个大新。。安装包放在newApkPath路径下，随时准备升级！！</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong><em>简直是Too simple！！！excited！！！</em></strong></p>
+<p>很惭愧，做了一点微小的工作， 谢谢大家。日-日</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/29/一句话的Android增量更新框架/" data-id="cj0u9t28q0004eo3w0tmj6nqa" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/增量更新/">增量更新</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Android应用的增量更新" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -135,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/Android应用的增量更新/" data-id="cj0rqksw80000rk3wcdla5rmv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/Android应用的增量更新/" data-id="cj0u9t28f0000eo3w0gbs83lg" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/增量更新/">增量更新</a></li></ul>
@@ -182,7 +238,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/27/hello-world/" data-id="cj0rqksxk000nrk3wcy0dckq6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/27/hello-world/" data-id="cj0u9t28v0007eo3wor7rma3k" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -242,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/26/Android热修复框架-AndFix在项目内部署/" data-id="cj0rqkswc0001rk3wjc4sefzr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/26/Android热修复框架-AndFix在项目内部署/" data-id="cj0u9t28j0001eo3wl6kht42c" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
@@ -336,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/25/Android热修复框架-AndFix的初步接触/" data-id="cj0rqkswi0003rk3w46tyfrsn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/25/Android热修复框架-AndFix的初步接触/" data-id="cj0u9t28t0005eo3wymsxk8t9" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
@@ -457,7 +513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/09/Java语言的新特性/" data-id="cj0rqkswk0004rk3w5ti2p60f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/09/Java语言的新特性/" data-id="cj0u9t28o0003eo3wal4m80j7" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -479,7 +535,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/增量更新/">增量更新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
     </div>
@@ -491,14 +547,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/增量更新/" style="font-size: 10px;">增量更新</a> <a href="/tags/热修复/" style="font-size: 13.33px;">热修复</a>
+      <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/增量更新/" style="font-size: 10px;">增量更新</a> <a href="/tags/热修复/" style="font-size: 10px;">热修复</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
@@ -508,9 +564,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/29/一句话的Android增量更新框架/">一句话的Android增量更新框架</a>
+          </li>
         
           <li>
             <a href="/2017/03/27/Android应用的增量更新/">Android应用的增量更新</a>
@@ -526,10 +586,6 @@
         
           <li>
             <a href="/2017/03/25/Android热修复框架-AndFix的初步接触/">Android热修复框架: AndFix的初步接触</a>
-          </li>
-        
-          <li>
-            <a href="/2016/12/09/Java语言的新特性/">Java语言的新特性</a>
           </li>
         
       </ul>

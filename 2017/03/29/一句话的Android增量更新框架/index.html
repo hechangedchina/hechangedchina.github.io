@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一句话的Android增量更新框架 | 他</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android应用更新要使用完整的新版本Apk安装，增量更新则是提供一个新旧版本偏差数据的patch包供应用下载，然后Android应用本地使用patch包和本地apk合成新版本apk。而patch包的体积通常都远小于新版本的apk，可以为用户节省流量和下载时间，节省时间就是延续生命，所以增量更新十分实用。
+一些学习文章：  Android应用的增量更新  Android 增量更新完全解析 是增量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一句话的Android增量更新框架">
+<meta property="og:url" content="http://yoursite.com/2017/03/29/一句话的Android增量更新框架/index.html">
+<meta property="og:site_name" content="他">
+<meta property="og:description" content="Android应用更新要使用完整的新版本Apk安装，增量更新则是提供一个新旧版本偏差数据的patch包供应用下载，然后Android应用本地使用patch包和本地apk合成新版本apk。而patch包的体积通常都远小于新版本的apk，可以为用户节省流量和下载时间，节省时间就是延续生命，所以增量更新十分实用。
+一些学习文章：  Android应用的增量更新  Android 增量更新完全解析 是增量">
+<meta property="og:updated_time" content="2017-03-29T02:37:17.627Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一句话的Android增量更新框架">
+<meta name="twitter:description" content="Android应用更新要使用完整的新版本Apk安装，增量更新则是提供一个新旧版本偏差数据的patch包供应用下载，然后Android应用本地使用patch包和本地apk合成新版本apk。而patch包的体积通常都远小于新版本的apk，可以为用户节省流量和下载时间，节省时间就是延续生命，所以增量更新十分实用。
+一些学习文章：  Android应用的增量更新  Android 增量更新完全解析 是增量">
+  
+    <link rel="alternate" href="/atom.xml" title="他" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">他</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-一句话的Android增量更新框架" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/29/一句话的Android增量更新框架/" class="article-date">
+  <time datetime="2017-03-29T01:05:37.000Z" itemprop="datePublished">2017-03-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一句话的Android增量更新框架
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Android应用更新要使用完整的新版本Apk安装，增量更新则是提供一个新旧版本偏差数据的patch包供应用下载，然后Android应用本地使用patch包和本地apk合成新版本apk。而patch包的体积通常都远小于新版本的apk，可以为用户节省流量和下载时间，节省时间就是<strong>延续生命</strong>，所以增量更新十分实用。</p>
+<p>一些学习文章：<br>  <a href="https://hechangedchina.github.io/2017/03/27/Android%E5%BA%94%E7%94%A8%E7%9A%84%E5%A2%9E%E9%87%8F%E6%9B%B4%E6%96%B0/" target="_blank" rel="external">Android应用的增量更新</a><br>  <a href="http://blog.csdn.net/lmj623565791/article/details/52761658" target="_blank" rel="external">Android 增量更新完全解析 是增量不是热修复</a></p>
+<p>资料里十分详细的介绍了如何在你自己的Android项目中部署增量更新功能，而实际上这个部署过程对新手来说是复杂而浪费时间的。它需要做配置NDK，并移植bsdiff/bspatch工具到Android系统，编写jni调用等麻烦事，<strong>这是坠痛苦的</strong>。</p>
+<p><strong><em>I am Angry！！！ 你们这样搞是不行的！！！</em></strong></p>
+<p>应运而生的<strong>BigNews框架</strong>（Github: <a href="https://github.com/ha-excited/BigNews" target="_blank" rel="external">ha-excited/BigNews</a>）为你省去了麻烦的增量更新部署过程，无需添加代码配置文件以及NDK编译，你只需要：</p>
+<ol>
+<li><p>在你项目根build.gradle添加代码：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">allprojects</span> &#123;</div><div class="line">    <span class="keyword">repositories</span> &#123;</div><div class="line">        ...</div><div class="line">        maven &#123; url <span class="string">'https://jitpack.io'</span> &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在你项目模块内的build.gradle添加代码，然后Gradle Sync：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">    <span class="keyword">compile</span> <span class="string">'com.github.ha-excited:BigNews:0.1.1'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载到patch文件后，你只需要写一句话，就可以合成新版本apk了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">String oldApkPath = ...;</div><div class="line">String newApkPath = ...;</div><div class="line">String patchPath = ...;</div><div class="line"><span class="comment">//我就说一句话，这是坠吼的！</span></div><div class="line">BigNews.make(oldApkPath, newApkPath, patchPath);</div><div class="line"><span class="comment">//已经弄出了一个大新。。安装包放在newApkPath路径下，随时准备升级！！</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong><em>简直是Too simple！！！excited！！！</em></strong></p>
+<p>很惭愧，做了一点微小的工作， 谢谢大家。日-日</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/29/一句话的Android增量更新框架/" data-id="cj0u9t28q0004eo3w0tmj6nqa" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/增量更新/">增量更新</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/27/Android应用的增量更新/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">Android应用的增量更新</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/增量更新/">增量更新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/热修复/">热修复</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/增量更新/" style="font-size: 10px;">增量更新</a> <a href="/tags/热修复/" style="font-size: 10px;">热修复</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/29/一句话的Android增量更新框架/">一句话的Android增量更新框架</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/Android应用的增量更新/">Android应用的增量更新</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/27/hello-world/">Hexo 使用说明</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/26/Android热修复框架-AndFix在项目内部署/">Android热修复框架: AndFix在项目内部署</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/25/Android热修复框架-AndFix的初步接触/">Android热修复框架: AndFix的初步接触</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 jiang zemin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
